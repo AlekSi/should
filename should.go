@@ -15,10 +15,29 @@ func BeEqual[T any](tb testing.TB, actual T, expected any) bool {
 func BeEqualf[T any](tb testing.TB, actual T, expected any, msg string, args ...any) bool {
 	tb.Helper()
 
-	if !are.Equal(actual, expected) {
-		tb.Errorf(msg, args...)
-		return false
+	if are.Equal(actual, expected) {
+		return true
 	}
 
-	return true
+	if len(args) == 0 {
+		tb.Error(msg)
+	} else {
+		tb.Errorf(msg, args...)
+	}
+
+	return false
+}
+
+func BeZero[T any](tb testing.TB, actual T) bool {
+	tb.Helper()
+
+	var expected T
+	return BeEqual(tb, actual, expected)
+}
+
+func BeZerof[T any](tb testing.TB, actual T, msg string, args ...any) bool {
+	tb.Helper()
+
+	var expected T
+	return BeEqualf(tb, actual, expected, msg, args...)
 }
