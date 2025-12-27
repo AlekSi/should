@@ -26,7 +26,7 @@ func BeEqual[T any](tb testing.TB, actual T, expected any) bool {
 	tb.Helper()
 
 	f := func() bool { return are.Equal(actual, expected) }
-	return assert(tb, f, "%v != %v", actual, expected)
+	return assert(tb, f, "%[1]v (%[1]T) != %[2]v (%[2]T)", actual, expected)
 }
 
 func BeEqualf[T any](tb testing.TB, actual T, expected any, msg string, args ...any) bool {
@@ -40,7 +40,7 @@ func NotBeEqual[T any](tb testing.TB, actual T, expected any) bool {
 	tb.Helper()
 
 	f := func() bool { return !are.Equal(actual, expected) }
-	return assert(tb, f, "%v == %v", actual, expected)
+	return assert(tb, f, "%[1]v (%[1]T) == %[2]v (%[2]T)", actual, expected)
 }
 
 func NotBeEqualf[T any](tb testing.TB, actual T, expected any, msg string, args ...any) bool {
@@ -55,7 +55,7 @@ func BeZero[T any](tb testing.TB, actual T) bool {
 
 	var expected T
 	f := func() bool { return are.Equal(actual, expected) }
-	return assert(tb, f, "%v != %v", actual, expected)
+	return assert(tb, f, "%[1]v (%[1]T) != %[2]v (%[2]T)", actual, expected)
 }
 
 func BeZerof[T any](tb testing.TB, actual T, msg string, args ...any) bool {
@@ -71,7 +71,7 @@ func NotBeZero[T any](tb testing.TB, actual T) bool {
 
 	var expected T
 	f := func() bool { return !are.Equal(actual, expected) }
-	return assert(tb, f, "%v == %v", actual, expected)
+	return assert(tb, f, "%[1]v (%[1]T) == %[2]v (%[2]T)", actual, expected)
 }
 
 func NotBeZerof[T any](tb testing.TB, actual T, msg string, args ...any) bool {

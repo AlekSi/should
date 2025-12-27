@@ -32,7 +32,7 @@ func TestEqual(t *testing.T) {
 	} {
 		t.Run(name, func(t *testing.T) {
 			if a := tc.f(); a != tc.expected {
-				t.Errorf("actual %v, expected %v", a, tc.expected)
+				t.Errorf("actual %[1]v (%[1]T), expected %[2]v (%[2]T)", a, tc.expected)
 			}
 		})
 	}
